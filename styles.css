@@ -1,0 +1,435 @@
+/* Variables globales */
+:root {
+  --Back-color: #373b3b3f;
+  --gris-marengo: #34495e;
+  --negro: #34393bb7;
+  --blanco: #ffffff;
+  --naranja: #fd6500;
+  --rojo-error: #f71410;
+  --fondo-error: #ffebee;
+  --azul: #0a6fdbd7;
+  --verde: #28a745;
+  --rojo: #dc3545;
+  --azul-claro: #17a2b8;
+  --naranja-validacion: #ff5733;
+}
+
+/* Reset y estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--Back-color);
+  color: var(--negro);
+  line-height: 1.6;
+}
+
+/* Menú flotante */
+.floating-menu {
+  position: fixed;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(52, 73, 94, 0.6);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.floating-menu h3 {
+  margin: 0 0 10px 0;
+  color: var(--azul-claro);
+}
+
+.floating-menu ul {
+  list-style: none;
+}
+
+.floating-menu ul li a {
+  color: var(--blanco);
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+.floating-menu ul li a:hover {
+  color: var(--naranja);
+}
+
+/* Contenedor principal */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  margin-bottom: 80px;
+  width: 70%;
+  padding: 20px;
+  border: 1px solid var(--gris-marengo);
+  border-radius: 10px;
+  background-color: var(--blanco);
+  position: relative;
+  min-height: fit-content;
+  padding-bottom: 100px;
+}
+
+/* Barra de navegación */
+.nav-bar {
+  width: 100%;
+  background-color: var(--gris-marengo);
+  color: var(--blanco);
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Recuadros colapsables */
+.collapsible-box {
+  width: 100%;
+  margin: 5px 0;
+  /* border: 5px solid var(--gris-marengo);
+  border-radius: 1px;*/
+  background-color: var(--naranja);
+}
+
+.collapse-button {
+  background-color: var(--azul);
+  color: var(--blanco);
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.collapse-button:hover {
+  background-color: darken(var(--naranja), 10%);
+}
+
+.content {
+  padding: 0 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background-color: var(--blanco);
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 5px 0;
+}
+
+th,
+td {
+  padding: 4px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--gris-marengo);
+}
+
+th {
+  background-color: var(--azul);
+  color: var(--blanco);
+}
+
+/* Inputs */
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid var(--gris-marengo);
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--naranja);
+}
+
+/* Tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 520px;
+  background-color: #555;
+  color: var(--blanco);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -110px;
+  opacity: 0;
+  transition: opacity 0.9s, visibility 0.9s;
+}
+
+.tooltip:hover .tooltiptext,
+.tooltip .tooltiptext:hover {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip-icon {
+  background-color: var(--azul);
+  color: var(--blanco);
+  border-radius: 50%;
+  padding: 8px;
+  width: 8px;
+  height: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Popup de validación */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.popup-content {
+  position: relative;
+  background-color: var(--blanco);
+  margin: 5% auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 1000px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add new styles for the close button */
+#cerrarValidacion {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--rojo);
+  color: var(--blanco);
+  width: 60px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+#cerrarValidacion:hover {
+  background-color: darkred;
+}
+
+/* Tabla de validación */
+.tabla-comparacion {
+  max-height: 500px;
+  overflow-y: auto;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid var(--gris-marengo);
+}
+
+#tablaValidacion {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#tablaValidacion th,
+#tablaValidacion td {
+  padding: 6px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--gris-marengo);
+}
+
+#tablaValidacion th {
+  position: sticky;
+  top: 0;
+  background-color: var(--azul);
+  color: var(--blanco);
+}
+
+.diferencia-encontrada {
+  background-color: var(--fondo-error);
+}
+
+/* Discriminante */
+.discriminante-w01 {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid var(--gris-marengo);
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.discriminante-w01.diferencia-encontrada {
+  background-color: var(--fondo-error);
+  border-color: var(--rojo-error);
+}
+
+.discriminante-w01 h3 {
+  color: var(--azul);
+  margin-bottom: 10px;
+}
+
+/* Botones */
+.button-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Center the container */
+  width: 70%; /* Match main-container width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  background-color: var(--blanco);
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-top: 1px solid var(--gris-marengo);
+  max-width: 1000px; /* Optional: add max-width to match any constraints */
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--blanco);
+  transition: opacity 0.3s ease;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button#ingresarPropuestaBtn {
+  background-color: var(--verde);
+}
+button#borrarDatosBtn {
+  background-color: var(--rojo);
+}
+button#guardarDatosBtn {
+  background-color: var(--azul-claro);
+}
+button#validarBtn {
+  background-color: var(--naranja-validacion);
+}
+button#enviarBtn,
+button#formularioCompletoBtn {
+  background-color: var(--azul);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .main-container {
+    width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 120px;
+  }
+
+  .button-container {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .button-container button {
+    flex: 1 1 calc(50% - 10px);
+  }
+
+  .floating-menu {
+    display: none;
+  }
+
+  .popup-content {
+    width: 95%;
+    margin: 10% auto;
+  }
+
+  .tooltip .tooltiptext {
+    width: 280px;
+    margin-left: -140px;
+  }
+}
+
+/*alertas*/
+.alerta-temporal {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  padding: 30px 55px;
+  border-radius: 4px;
+  font-weight: bold;
+  z-index: 2000;
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.alerta-temporal.mostrar {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.alerta-temporal.error {
+  background-color: var(--fondo-error);
+  color: var(--rojo-error);
+  border: 1px solid var(--rojo-error);
+}
+
+.alerta-temporal.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+}
+
+.alerta-monto {
+  color: var(--rojo-error);
+  font-size: 0.85em;
+  margin-top: 4px;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
