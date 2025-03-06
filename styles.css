@@ -396,7 +396,7 @@ button#formularioCompletoBtn {
   font-weight: bold;
   z-index: 2000;
   opacity: 0;
-  transition: transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.4s;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
 
@@ -422,7 +422,7 @@ button#formularioCompletoBtn {
   font-size: 0.85em;
   margin-top: 4px;
   font-weight: bold;
-  animation: fadeIn 0.3s ease-in;
+  animation: fadeIn 0.4s ease-in;
 }
 
 @keyframes fadeIn {
@@ -432,4 +432,9 @@ button#formularioCompletoBtn {
   to {
     opacity: 1;
   }
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

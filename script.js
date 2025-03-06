@@ -9,15 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const tbody = document.getElementById("resultadosValidacion");
   const discriminanteDiv = document.getElementById("discriminanteW01");
   const alertaValidacion = document.getElementById("alertaValidacion");
+  const enviarBtn = document.getElementById("enviarBtn");
 
-  // Alerta monto - Add this function after the DOM elements declarations
+  // Alerta monto -
   function mostrarAlertaMonto(input, valorConocido, valorIngresado) {
     // Remove any existing alert
     const existingAlert = input.parentElement.querySelector(".alerta-monto");
     if (existingAlert) {
       existingAlert.remove();
     }
-
     // Check if value exceeds threshold (30% more than known value)
     if (valorIngresado > valorConocido * 1.3) {
       const alertaDiv = document.createElement("div");
@@ -110,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
       valores["501"]
     );
   }
-
   // Función para mostrar alerta temporal
   function mostrarAlertaTemporal(mensaje, tipo) {
     return new Promise((resolve) => {
@@ -126,8 +125,8 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
           alertaTemp.remove();
           resolve();
-        }, 300);
-      }, 2000);
+        }, 200);
+      }, 1000);
     });
   }
 
@@ -139,6 +138,11 @@ document.addEventListener("DOMContentLoaded", function () {
     tbody.innerHTML = "";
     discriminanteDiv.innerHTML = "";
     let hayDiferencias = false;
+
+    // Enable enviar button after validation
+    if (enviarBtn) {
+      enviarBtn.disabled = false;
+    }
 
     // Obtener valores actuales
     const valoresActuales = {};
@@ -200,8 +204,10 @@ document.addEventListener("DOMContentLoaded", function () {
       tbody.appendChild(tr);
     });
 
-    // Mostrar popup después de la alerta
-    popup.style.display = "block";
+    // Mostrar popup después de que se complete la alerta temporal
+    setTimeout(() => {
+      popup.style.display = "block";
+    }, 1200); //
   }
 
   // Función para cerrar popup
@@ -284,11 +290,13 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", toggleCollapse)
   );
 
+  // Add to the borrarDatos event listener to disable enviarBtn when clearing
   if (borrarDatosBtn) {
     borrarDatosBtn.addEventListener("click", function () {
       inputs.forEach((input) => (input.value = ""));
       calcularTotal538();
       if (validarBtn) validarBtn.disabled = true;
+      if (enviarBtn) enviarBtn.disabled = true; // Disable enviar button when clearing
     });
   }
 
@@ -325,3 +333,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Inicialización
   calcularTotal538();
 });
+
+// Initialize enviarBtn as disabled
+if (enviarBtn) {
+  enviarBtn.disabled = true;
+}
