@@ -38,21 +38,28 @@ document.addEventListener("DOMContentLoaded", function () {
     409: 0,
   };
 
-  // Funciones
+  // Función para validar montos superiores e inferiores
   function mostrarAlertaMonto(input, valorConocido, valorIngresado) {
     const existingAlert = input.parentElement.querySelector(".alerta-monto");
     if (existingAlert) {
       existingAlert.remove();
     }
+
     if (valorIngresado > valorConocido * 1.3) {
       const alertaDiv = document.createElement("div");
       alertaDiv.className = "alerta-monto";
       alertaDiv.textContent =
         "El monto ingresado es superior al conocido por el SII ¿Está seguro de ingresar?";
       input.parentElement.appendChild(alertaDiv);
+    } else if (valorIngresado < valorConocido * 0.7) {
+      const alertaDiv = document.createElement("div");
+      alertaDiv.className = "alerta-monto";
+      alertaDiv.textContent =
+        "El monto ingresado es inferior al conocido por el SII ¿Está seguro de ingresar?";
+      input.parentElement.appendChild(alertaDiv);
     }
   }
-
+  //calculo discriminante w01
   function calcularDiscriminanteW01(valores) {
     return (
       valores["502"] +
