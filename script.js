@@ -1,17 +1,12 @@
-
-
 // Add a helper function for number formatting
 function formatNumber(number) {
-  return number.toLocaleString('es-CL');
+  return number.toLocaleString("es-CL");
 }
 
 // Add a helper function to parse formatted numbers
 function parseFormattedNumber(str) {
-  return Number(str.replace(/\./g, '')) || 0;
+  return Number(str.replace(/\./g, "")) || 0;
 }
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
   // Elementos del DOMY
@@ -73,60 +68,64 @@ document.addEventListener("DOMContentLoaded", function () {
       valores["501"]
     );
   }
-
+  // Alerta Temporal Validador
   function mostrarAlertaTemporal(mensaje, tipo) {
     return new Promise((resolve) => {
       const alertaTemp = document.createElement("div");
       alertaTemp.className = `alerta-temporal ${tipo}`;
       alertaTemp.textContent = mensaje;
       document.body.appendChild(alertaTemp);
-
+      // Mostrar alerta
       setTimeout(() => alertaTemp.classList.add("mostrar"), 100);
-
+      // Ocultar después de 2 segundos
       setTimeout(() => {
         alertaTemp.classList.remove("mostrar");
         setTimeout(() => {
           alertaTemp.remove();
           resolve();
         }, 400);
-      }, 1000);
+      }, 2000);
     });
   }
- // Modify validarCodigos
- async function validarCodigos(event) {
-  event.preventDefault();
-  tbody.innerHTML = "";
-  discriminanteDiv.innerHTML = "";
-  let hayDiferencias = false;
+  // Modify validarCodigos
+  async function validarCodigos(event) {
+    event.preventDefault();
+    tbody.innerHTML = "";
+    discriminanteDiv.innerHTML = "";
+    let hayDiferencias = false;
 
-  if (enviarBtn) {
-    enviarBtn.disabled = false;
-  }
+    if (enviarBtn) {
+      enviarBtn.disabled = false;
+    }
 
-  const valoresActuales = {};
-  inputs.forEach((input) => {
-    const codigo = input.getAttribute("data-codigo") ||
-      input.parentElement.previousElementSibling.textContent.trim();
-    valoresActuales[codigo] = parseFormattedNumber(input.value);
-  });
+    const valoresActuales = {};
+    inputs.forEach((input) => {
+      const codigo =
+        input.getAttribute("data-codigo") ||
+        input.parentElement.previousElementSibling.textContent.trim();
+      valoresActuales[codigo] = parseFormattedNumber(input.value);
+    });
 
-  const discriminanteIngresado = calcularDiscriminanteW01(valoresActuales);
-  const discriminanteEsperado = calcularDiscriminanteW01(codigosConocidos);
-  const diferenciaDiscriminante = discriminanteIngresado - discriminanteEsperado;
+    const discriminanteIngresado = calcularDiscriminanteW01(valoresActuales);
+    const discriminanteEsperado = calcularDiscriminanteW01(codigosConocidos);
+    const diferenciaDiscriminante =
+      discriminanteIngresado - discriminanteEsperado;
 
-  if (diferenciaDiscriminante !== 0) {
-    hayDiferencias = true;
-  }
+    if (diferenciaDiscriminante !== 0) {
+      hayDiferencias = true;
+    }
 
-  await mostrarAlertaTemporal(
-    hayDiferencias
-      ? "Se han detectado diferencias en los códigos ingresados"
-      : "Todos los códigos coinciden con los valores esperados",
-    hayDiferencias ? "error" : "success"
-  );
+    await mostrarAlertaTemporal(
+      hayDiferencias
+        ? "Se han detectado diferencias en los códigos ingresados"
+        : "Todos los códigos coinciden con los valores esperados",
+      hayDiferencias ? "error" : "success"
+    );
 
-  discriminanteDiv.innerHTML = `
-    <div class="discriminante-w01 ${hayDiferencias ? "diferencia-encontrada" : ""}">
+    discriminanteDiv.innerHTML = `
+    <div class="discriminante-w01 ${
+      hayDiferencias ? "diferencia-encontrada" : ""
+    }">
       <h3>Discriminante W01</h3>
       <p>Valor Ingresado: ${formatNumber(discriminanteIngresado)}</p>
       <p>Valor Esperado: ${formatNumber(discriminanteEsperado)}</p>
@@ -134,33 +133,30 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   `;
 
-  Object.keys(codigosConocidos).forEach((codigo) => {
-    const valorActual = valoresActuales[codigo] || 0;
-    const valorEsperado = codigosConocidos[codigo];
-    const diferencia = valorActual - valorEsperado;
+    Object.keys(codigosConocidos).forEach((codigo) => {
+      const valorActual = valoresActuales[codigo] || 0;
+      const valorEsperado = codigosConocidos[codigo];
+      const diferencia = valorActual - valorEsperado;
 
-    const tr = document.createElement("tr");
-    if (diferencia !== 0) {
-      tr.classList.add("diferencia-encontrada");
-    }
+      const tr = document.createElement("tr");
+      if (diferencia !== 0) {
+        tr.classList.add("diferencia-encontrada");
+      }
 
-
-  
-    tr.innerHTML = `
+      tr.innerHTML = `
     <td>${codigo}</td>
     <td>${formatNumber(valorActual)}</td>
     <td>${formatNumber(valorEsperado)}</td>
     <td>${formatNumber(diferencia)}</td>
     <td><a href="https://www.sii.cl" target="_blank">Ver ayuda</a></td>
   `;
-  tbody.appendChild(tr);
-});
+      tbody.appendChild(tr);
+    });
 
-setTimeout(() => {
-  popup.style.display = "block";
-}, 1200);
-}
-
+    setTimeout(() => {
+      popup.style.display = "block";
+    }, 2200);
+  }
 
   function cerrarPopup() {
     popup.style.opacity = "0";
