@@ -438,3 +438,8 @@ button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.header-info h1 {
+  text-align: left;
+  margin-left: 0px;
+}
