@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
           alertaTemp.remove();
           resolve();
         }, 400);
-      }, 2000);
+      }, 3000);
     });
   }
   // Modify validarCodigos
@@ -156,9 +156,10 @@ document.addEventListener("DOMContentLoaded", function () {
       ? `Se han detectado diferencias en las observaciones: ${mensajeDiferencias.join(
           ", "
         )}`
-      : "Todos los códigos coinciden con los valores esperados";
+      : "Su declaración no presenta diferencias por la información del Servicio de Impuestos Internos. Avanzar al Envio y pago del Formulario F29";
 
     await mostrarAlertaTemporal(mensaje, hayDiferencias ? "error" : "success");
+
     // #page-w01
     discriminanteDiv.innerHTML = `
       <div class="discriminante-w01 ${
@@ -221,9 +222,26 @@ document.addEventListener("DOMContentLoaded", function () {
       tbody.appendChild(tr);
     });
 
-    setTimeout(() => {
-      popup.style.display = "block";
-    }, 2200);
+    if (hayDiferencias) {
+      // Show popup only if there are differences
+      setTimeout(() => {
+        popup.style.display = "block";
+      }, 2200);
+    } else {
+      // If no differences, show success message but stay on page
+      setTimeout(() => {
+        const successDiv = document.createElement("div");
+        successDiv.className = "success-message";
+        successDiv.textContent = "Puede proceder al Envio y  pago del F29";
+        document.body.appendChild(successDiv);
+
+        // Remove success message after 3 seconds
+        setTimeout(() => {
+          successDiv.remove();
+        }, 3000);
+      }, 2200);
+    }
+
     // Inside the validarCodigos function, after populating the W08 discriminante
     // Add this code to populate the W08 results table:
 
