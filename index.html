@@ -21,12 +21,10 @@
 
     <!-- contenedor Principal -->
     <div class="main-container">
-
-    <!-- Título -->
-    <div class="header-info" style="text-align: left;">
-      <h1>Declaración de Formulario 29 (F29)</h1>
-    </div>
-
+      <!-- Título -->
+      <div class="header-info" style="text-align: left">
+        <h1>Declaración de Formulario 29 (F29)</h1>
+      </div>
 
       <!-- Recuadro colapsable Genera Debito-->
       <div class="collapsible-box" id="genera-debito">
@@ -413,6 +411,130 @@
         </div>
       </div>
 
+      <!-- Recuadro colapsable creditos-->
+      <div class="collapsible-box" id="trib_sim">
+        <button class="collapse-button">
+          CRÉDITOS Y COMPRAS CON DERECHO A CRÉDITO FISCAL
+        </button>
+        <div class="content">
+          <table>
+            <thead>
+              <tr>
+                <th>Línea de Código</th>
+                <th>Descripción</th>
+                <th>Codigo Cantidad</th>
+                <th>Cantidad de Documentos</th>
+                <th>Código Monto</th>
+                <th>Monto</th>
+                <th>Operador</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Fila 28 -->
+              <tr>
+                <td>28</td>
+                <td>
+                  <div class="tooltip">
+                    Facturas recibidas del giro y Facturas de compra emitidas
+                    <span class="tooltiptext"> tooltip text </span>
+                    <span class="tooltip-icon">i</span>
+                  </div>
+                </td>
+                <td>519</td>
+                <td><input type="number" class="doc-input" /></td>
+                <td>520</td>
+                <td><input type="number" class="val-input" /></td>
+                <td>+</td>
+              </tr>
+              <!-- Fila 29 -->
+              <tr>
+                <td>29</td>
+                <td>
+                  <div class="tooltip">
+                    Facturas recibidas de Proveedores: Supermercados y Comercios
+                    similares, Art.23 Nº4 D.L.825, de 1974 (Ley Nº20.780)
+                    <span class="tooltiptext"> tooltip text </span>
+                    <span class="tooltip-icon">i</span>
+                  </div>
+                </td>
+                <td>761</td>
+                <td><input type="number" class="doc-input" /></td>
+                <td>762</td>
+                <td><input type="number" class="val-input" /></td>
+                <td>+</td>
+              </tr>
+              <!-- Fila 30 -->
+              <tr>
+                <td>30</td>
+                <td>
+                  <div class="tooltip">
+                    Facturas recibidas por Adquisición o Construcción de Bienes
+                    Inmuebles, Art.8º transitorio (Ley Nº20.780)
+                    <span class="tooltiptext"> tooltip text </span>
+                    <span class="tooltip-icon">i</span>
+                  </div>
+                </td>
+                <td>765</td>
+                <td><input type="number" class="doc-input" /></td>
+                <td>766</td>
+                <td><input type="number" class="val-input" /></td>
+                <td>+</td>
+              </tr>
+              <!-- Fila 31 -->
+              <tr>
+                <td>31</td>
+                <td>
+                  <div class="tooltip">
+                    Facturas activo fijo
+                    <span class="tooltiptext"> tooltip text </span>
+                    <span class="tooltip-icon">i</span>
+                  </div>
+                </td>
+                <td>524</td>
+                <td><input type="number" class="doc-input" /></td>
+                <td>525</td>
+                <td><input type="number" class="val-input" /></td>
+                <td>+</td>
+              </tr>
+              <!-- Fila 32 -->
+              <tr>
+                <td>32</td>
+                <td>
+                  <div class="tooltip">
+                    Notas de Crédito recibidas y Notas de Crédito emitidas por
+                    retención de cambio de sujeto
+                    <span class="tooltiptext"> tooltip text </span>
+                    <span class="tooltip-icon">i</span>
+                  </div>
+                </td>
+                <td>527</td>
+                <td><input type="number" class="doc-input" /></td>
+                <td>528</td>
+                <td><input type="number" class="val-input" /></td>
+                <td>-</td>
+              </tr>
+              <!-- Fila 33 -->
+              <tr>
+                <td>32</td>
+                <td>
+                  <div class="tooltip">
+                    Notas de Débito recibidas y Notas de Débito emitidas por
+                    retención de cambio de sujeto
+                    <span class="tooltiptext"> tooltip text </span>
+                    <span class="tooltip-icon">i</span>
+                  </div>
+                </td>
+                <td>531</td>
+                <td><input type="number" class="doc-input" /></td>
+                <td>532</td>
+                <td><input type="number" class="val-input" /></td>
+                <td>+</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- Recuadro colapsable Tributación Simplificada-->
       <div class="collapsible-box" id="trib_sim">
         <button class="collapse-button">
@@ -517,10 +639,14 @@
 
     <!-- Barra de botones fija -->
     <div class="button-container">
-      <button type="button" id="ingresarPropuestaBtn">Ingresar Propuesta</button>
+      <button type="button" id="ingresarPropuestaBtn">
+        Ingresar Propuesta
+      </button>
       <button type="button" id="borrarDatosBtn">Limpiar Datos</button>
       <button type="button" id="guardarDatosBtn">Guardar Datos</button>
-      <button type="button" id="validarBtn" disabled>Validar Declaración</button>
+      <button type="button" id="validarBtn" disabled>
+        Validar Declaración
+      </button>
       <button type="button" id="enviarBtn">Enviar Declaración</button>
       <button type="button" id="formularioCompletoBtn">
         Ir a formulario completo
@@ -528,36 +654,74 @@
     </div>
 
     <!-- funcion validar -->
-    <div id="validacionPopup" class="popup" style="display: none;">
+
+    <!-- Barra Lateral-->
+    <div id="validacionPopup" class="popup" style="display: none">
       <div class="popup-content">
-      <h2>Validación de Códigos</h2>
-      <h3>Observación W01</h3>
-      <h4>
-        "El débito fiscal registrado en su Declaración y Pago Simultáneo de
-        Impuestos (Formulario 29) por concepto de ventas y/o servicios, es
-        inferior al débito registrado en su Información del Libro de Ventas."
-      </h4>
-      <div id="discriminanteW01"></div>
-      <div id="alertaValidacion" class="alerta"></div>
-      <div class="tabla-comparacion">
-        <table id="tablaValidacion">
-        <thead>
-          <tr>
-          <th>Código</th>
-          <th>Valor Ingresado</th>
-          <th>Valor Esperado</th>
-          <th>Diferencia</th>
-          <th>Ayuda</th>
-          </tr>
-        </thead>
-        <tbody id="resultadosValidacion"></tbody>
-        </table>
-        <div class="popup-buttons">
-          <button id="cerrarValidacion">Cerrar</button>
+        <div class="popup-sidebar">
+          <button class="sidebar-btn active" data-page="w01">W01</button>
+          <button class="sidebar-btn" data-page="w02">W08</button>
+          <button class="sidebar-btn" data-page="w03">W18</button>
+          <button class="sidebar-btn" data-page="w04">W0X</button>
+        </div>
+
+        <!-- W01 -->
+        <div class="popup-main">
+          <div class="popup-page active" id="page-w01">
+            <h2>Validación de Códigos</h2>
+            <h3>Observación W01</h3>
+            <h4>
+              "El débito fiscal registrado en su Declaración y Pago Simultáneo
+              de Impuestos (Formulario 29) por concepto de ventas y/o servicios,
+              es inferior al débito registrado en su Información del Libro de
+              Ventas."
+            </h4>
+            <div id="discriminanteW01"></div>
+            <div id="alertaValidacion" class="alerta"></div>
+            <div class="tabla-comparacion">
+              <table id="tablaValidacion">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Valor Ingresado</th>
+                    <th>Valor Esperado</th>
+                    <th>Diferencia</th>
+                    <th>Ayuda</th>
+                  </tr>
+                </thead>
+                <tbody id="resultadosValidacion"></tbody>
+              </table>
+            </div>
+          </div>
+          <!-- W08 -->
+
+          <div class="popup-page" id="page-w02">
+            <h2>Validación de Códigos</h2>
+            <h3>Observación W08</h3>
+            <h4>
+              El IVA crédito fiscal declarado por el contribuyente en sus F29,
+              asociado a los distintos tipos de facturas que soportan créditos;
+              resulta mayor al IVA crédito fiscal registrado en su Registro de
+              Compras (RC) o Información Electrónica de Compras (IEC).
+            </h4>
+            <!-- Similar structure for W02 -->
+          </div>
+          <div class="popup-page" id="page-w03">
+            <h2>Validación de Códigos</h2>
+            <h3>Observación W18</h3>
+            <!-- Similar structure for W03 -->
+          </div>
+          <div class="popup-page" id="page-w04">
+            <h2>Validación de Códigos</h2>
+            <h3>Observación W0X</h3>
+            <!-- Similar structure for W04 -->
+          </div>
+          <div class="popup-buttons">
+            <button id="cerrarValidacion">Cerrar</button>
+          </div>
         </div>
       </div>
     </div>
-
     <!-- Scripts -->
     <script src="script.js"></script>
   </body>

@@ -36,6 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
     759: 0 /*29030084*/,
     764: 0,
     409: 0,
+    //Creditos
+    520: 37939779880 /*29030108*/ /*29030320*/,
+    525: 0 /*29030138*/,
+    762: 5735894 /*29030118*/,
+    766: 0 /*29030128*/,
   };
 
   // Función para validar montos superiores e inferiores
@@ -75,6 +80,16 @@ document.addEventListener("DOMContentLoaded", function () {
       valores["501"]
     );
   }
+
+  // Discriminante W08
+  function calcularDiscriminanteW08(valores) {
+    return valores["520"] + valores["525"] + valores["762"] + valores["766"];
+  }
+  // Discriminante W03
+  function calcularDiscriminanteW03(valores) {
+    return valores["502"] + valores["111"] + valores["513"] - valores["510"];
+  }
+
   // Alerta Temporal Validador
   function mostrarAlertaTemporal(mensaje, tipo) {
     return new Promise((resolve) => {
@@ -112,31 +127,77 @@ document.addEventListener("DOMContentLoaded", function () {
         input.parentElement.previousElementSibling.textContent.trim();
       valoresActuales[codigo] = parseFormattedNumber(input.value);
     });
-
+    // DISCRINANTE W01
     const discriminanteIngresado = calcularDiscriminanteW01(valoresActuales);
     const discriminanteEsperado = calcularDiscriminanteW01(codigosConocidos);
     const diferenciaDiscriminante =
       discriminanteIngresado - discriminanteEsperado;
 
-    if (diferenciaDiscriminante !== 0) {
-      hayDiferencias = true;
-    }
+    // DISCRINANTE W08
+    const discriminanteW08Ingresado = calcularDiscriminanteW08(valoresActuales);
+    const discriminanteW08Esperado = calcularDiscriminanteW08(codigosConocidos);
+    const diferenciaDiscriminanteW08 =
+      discriminanteW08Ingresado - discriminanteW08Esperado;
 
-    await mostrarAlertaTemporal(
-      hayDiferencias
-        ? "Se han detectado diferencias en los códigos ingresados"
-        : "Todos los códigos coinciden con los valores esperados",
-      hayDiferencias ? "error" : "success"
-    );
+    // Check all discriminantes for differences
+    const diferencias = {
+      w01: diferenciaDiscriminante !== 0,
+      w08: diferenciaDiscriminanteW08 !== 0,
+    };
+    //CHEQUEA DIFERENCIAS
+    hayDiferencias = Object.values(diferencias).some((diff) => diff);
 
+    // Create detailed message for alert
+    const mensajeDiferencias = [];
+    if (diferencias.w01) mensajeDiferencias.push("W01");
+    if (diferencias.w08) mensajeDiferencias.push("W08");
+
+    const mensaje = hayDiferencias
+      ? `Se han detectado diferencias en las observaciones: ${mensajeDiferencias.join(
+          ", "
+        )}`
+      : "Todos los códigos coinciden con los valores esperados";
+
+    await mostrarAlertaTemporal(mensaje, hayDiferencias ? "error" : "success");
+    // #page-w01
     discriminanteDiv.innerHTML = `
-    <div class="discriminante-w01 ${
-      hayDiferencias ? "diferencia-encontrada" : ""
+      <div class="discriminante-w01 ${
+        hayDiferencias ? "diferencia-encontrada" : ""
+      }">
+        <h3>Discriminante W01</h3>
+        <p>Valor Ingresado: ${formatNumber(discriminanteIngresado)}</p>
+        <p>Valor Esperado: ${formatNumber(discriminanteEsperado)}</p>
+        <p>Diferencia: ${formatNumber(diferenciaDiscriminante)}</p>
+      </div>
+    `;
+
+    // #page-w08
+    document.querySelector("#page-w02").innerHTML = `
+    <h2>Validación de Códigos</h2>
+    <h3>Observación W08</h3>
+    <h4>El IVA crédito fiscal declarado por el contribuyente en sus F29, asociado a los distintos tipos de facturas que soportan créditos; resulta mayor al IVA crédito fiscal registrado en su Registro de Compras (RC) o Información Electrónica de Compras (IEC).</h4>
+    <div class="discriminante-w08 ${
+      diferenciaDiscriminanteW08 !== 0 ? "diferencia-encontrada" : ""
     }">
-      <h3>Discriminante W01</h3>
-      <p>Valor Ingresado: ${formatNumber(discriminanteIngresado)}</p>
-      <p>Valor Esperado: ${formatNumber(discriminanteEsperado)}</p>
-      <p>Diferencia: ${formatNumber(diferenciaDiscriminante)}</p>
+      <h3>Discriminante W08</h3>
+      <p>Valor Ingresado: ${formatNumber(discriminanteW08Ingresado)}</p>
+      <p>Valor Esperado: ${formatNumber(discriminanteW08Esperado)}</p>
+      <p>Diferencia: ${formatNumber(diferenciaDiscriminanteW08)}</p>
+    </div>
+    <div id="alertaValidacionW08" class="alerta"></div>
+    <div class="tabla-comparacion">
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Valor Ingresado</th>
+            <th>Valor Esperado</th>
+            <th>Diferencia</th>
+            <th>Ayuda</th>
+          </tr>
+        </thead>
+        <tbody id="resultadosValidacionW08"></tbody>
+      </table>
     </div>
   `;
 
@@ -151,18 +212,44 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       tr.innerHTML = `
-    <td>${codigo}</td>
-    <td>${formatNumber(valorActual)}</td>
-    <td>${formatNumber(valorEsperado)}</td>
-    <td>${formatNumber(diferencia)}</td>
-    <td><a href="https://www.sii.cl" target="_blank">Ver ayuda</a></td>
-  `;
+      <td>${codigo}</td>
+      <td>${formatNumber(valorActual)}</td>
+      <td>${formatNumber(valorEsperado)}</td>
+      <td>${formatNumber(diferencia)}</td>
+      <td><a href="https://www.sii.cl" target="_blank">Ver ayuda</a></td>
+    `;
       tbody.appendChild(tr);
     });
 
     setTimeout(() => {
       popup.style.display = "block";
     }, 2200);
+    // Inside the validarCodigos function, after populating the W08 discriminante
+    // Add this code to populate the W08 results table:
+
+    const w08Codigos = ["520", "525", "762", "766"];
+    const tbodyW08 = document.getElementById("resultadosValidacionW08");
+    tbodyW08.innerHTML = "";
+
+    w08Codigos.forEach((codigo) => {
+      const valorActual = valoresActuales[codigo] || 0;
+      const valorEsperado = codigosConocidos[codigo];
+      const diferencia = valorActual - valorEsperado;
+
+      const tr = document.createElement("tr");
+      if (diferencia !== 0) {
+        tr.classList.add("diferencia-encontrada");
+      }
+
+      tr.innerHTML = `
+      <td>${codigo}</td>
+      <td>${formatNumber(valorActual)}</td>
+      <td>${formatNumber(valorEsperado)}</td>
+      <td>${formatNumber(diferencia)}</td>
+      <td><a href="https://www.sii.cl" target="_blank">Ver ayuda</a></td>
+    `;
+      tbodyW08.appendChild(tr);
+    });
   }
 
   function cerrarPopup() {
@@ -196,6 +283,8 @@ document.addEventListener("DOMContentLoaded", function () {
       764: 0,
       791: 0,
       409: 0,
+      520: 0,
+      762: 0,
     };
 
     inputs.forEach(function (input) {
@@ -215,7 +304,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function calcularTotal91(codigos) {
-    var total91 = codigos["538"] + codigos["409"];
+    var total91 = codigos["538"] - codigos["520"] - codigos["762"];
     codigos["91"] = total91;
     document.getElementById("total-monto-91").value = total91;
   }
@@ -327,4 +416,25 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   calcularTotal538();
+});
+
+/*barra de boton validaciones*/
+// Add this to your existing script.js
+document.querySelectorAll(".sidebar-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    // Remove active class from all buttons and pages
+    document
+      .querySelectorAll(".sidebar-btn")
+      .forEach((btn) => btn.classList.remove("active"));
+    document
+      .querySelectorAll(".popup-page")
+      .forEach((page) => page.classList.remove("active"));
+
+    // Add active class to clicked button
+    button.classList.add("active");
+
+    // Show corresponding page
+    const pageId = `page-${button.dataset.page}`;
+    document.getElementById(pageId).classList.add("active");
+  });
 });
