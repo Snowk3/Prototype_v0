@@ -500,3 +500,17 @@ button:disabled {
 .discriminante-w08.diferencia-encontrada {
   border-left-color: #dc3545;
 }
+
+/*alerta de diferencia*/
+.sidebar-btn.has-difference {
+  position: relative;
+}
+
+.sidebar-btn.has-difference::after {
+  content: "⚠️";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+}

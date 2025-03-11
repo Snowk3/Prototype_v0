@@ -152,6 +152,22 @@ document.addEventListener("DOMContentLoaded", function () {
     if (diferencias.w01) mensajeDiferencias.push("W01");
     if (diferencias.w08) mensajeDiferencias.push("W08");
 
+    // Inside validarCodigos function, replace the button update section
+    Object.entries(diferencias).forEach(([tipo, tieneDiferencia]) => {
+      const pageId = tipo === "w08" ? "w02" : tipo; // Map w08 to w02 button
+      const button = document.querySelector(
+        `.sidebar-btn[data-page="${pageId}"]`
+      );
+
+      if (button) {
+        if (tieneDiferencia) {
+          button.classList.add("has-difference");
+        } else {
+          button.classList.remove("has-difference");
+        }
+      }
+    });
+
     const mensaje = hayDiferencias
       ? `Se han detectado diferencias en las observaciones: ${mensajeDiferencias.join(
           ", "
