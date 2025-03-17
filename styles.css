@@ -504,6 +504,7 @@ button:disabled {
 /*alerta de diferencia*/
 .sidebar-btn.has-difference {
   position: relative;
+  padding-right: 35px; /* Make room for the icon */
 }
 
 .sidebar-btn.has-difference::after {

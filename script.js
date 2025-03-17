@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ? `Se han detectado diferencias en las observaciones: ${mensajeDiferencias.join(
           ", "
         )}`
-      : "Su declaración no presenta diferencias por la información del Servicio de Impuestos Internos. Avanzar al Envio y pago del Formulario F29";
+      : "Su declaración no presenta diferencias significativas con la información conocida por Servicio de Impuestos Internos. Avanzar al Envio y pago del Formulario F29";
 
     await mostrarAlertaTemporal(mensaje, hayDiferencias ? "error" : "success");
 
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Show popup only if there are differences
       setTimeout(() => {
         popup.style.display = "block";
-      }, 2200);
+      }, 3200);
     } else {
       // If no differences, show success message but stay on page
       setTimeout(() => {
@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
           successDiv.remove();
         }, 3000);
-      }, 2200);
+      }, 3200);
     }
 
     // Inside the validarCodigos function, after populating the W08 discriminante
