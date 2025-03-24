@@ -345,21 +345,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function ingresarPropuesta() {
     inputs.forEach((input) => {
-        // Find the td that contains the code
-        const parentCell = input.closest('td');
-        const row = parentCell.closest('tr');
-        const cells = Array.from(row.cells);
-        const codeCell = cells.find(cell => {
-            const text = cell.textContent.trim();
-            return Object.keys(codigosConocidos).includes(text);
-        });
-
-        if (codeCell) {
-            const codigo = codeCell.textContent.trim();
-            if (codigo in codigosConocidos) {
-                input.value = codigosConocidos[codigo];
-            }
+        const codigo = input.getAttribute('data-codigo');
+        if (codigo && codigo in codigosConocidos) {
+            input.value = codigosConocidos[codigo];
         }
+    });
+
+    // Enable validate button after populating values
+    if (validarBtn) {
+        validarBtn.disabled = false;
+    }
+}
+
+// Add event listener for the button
+if (ingresarPropuestaBtn) {
+    ingresarPropuestaBtn.addEventListener('click', function() {
+        ingresarPropuesta();
+        calcularTotal538(); // Recalculate totals after populating values
     });
 
     calcularTotal538();
