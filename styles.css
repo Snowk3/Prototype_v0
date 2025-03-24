@@ -167,19 +167,24 @@ input[type="number"]:focus {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 520px;
-  background-color: #555;
+  width: 500px;
+  background-color: var(--gris-marengo);
   color: var(--blanco);
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;
+  text-align: left;
+  border-radius: 8px;
+  padding: 10px;
   position: absolute;
-  z-index: 1;
-  bottom: 100%;
+  z-index: 1500;
+  top: 100%;
   left: 50%;
-  margin-left: -110px;
+  transform: translateX(-50%);
   opacity: 0;
-  transition: opacity 0.9s, visibility 0.9s;
+  transition: opacity 0.3s, visibility 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  line-height: 1.5;
+  font-size: 14px;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .tooltip:hover .tooltiptext,
@@ -515,4 +520,3 @@ button:disabled {
   transform: translateY(-50%);
   font-size: 16px;
 }
-

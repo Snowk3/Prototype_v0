@@ -345,13 +345,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function ingresarPropuesta() {
     inputs.forEach((input) => {
-      const codigo =
-        input.getAttribute("data-codigo") ||
-        input.parentElement.previousElementSibling.textContent.trim();
+        // Find the td that contains the code
+        const parentCell = input.closest('td');
+        const row = parentCell.closest('tr');
+        const cells = Array.from(row.cells);
+        const codeCell = cells.find(cell => {
+            const text = cell.textContent.trim();
+            return Object.keys(codigosConocidos).includes(text);
+        });
 
-      if (codigo in codigosConocidos) {
-        input.value = codigosConocidos[codigo];
-      }
+        if (codeCell) {
+            const codigo = codeCell.textContent.trim();
+            if (codigo in codigosConocidos) {
+                input.value = codigosConocidos[codigo];
+            }
+        }
     });
 
     calcularTotal538();
