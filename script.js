@@ -472,3 +472,17 @@ document.querySelectorAll(".sidebar-btn").forEach((button) => {
     document.getElementById(pageId).classList.add("active");
   });
 });
+
+
+//boton esconde tootltip
+
+document.getElementById('tooltipToggle').addEventListener('change', function() {
+  const statusText = document.getElementById('tooltipStatus');
+  document.body.classList.toggle('hide-tooltips');
+  
+  if (this.checked) {
+      statusText.textContent = 'Activado';
+  } else {
+      statusText.textContent = 'Desactivado';
+  }
+});
