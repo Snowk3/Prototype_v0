@@ -210,7 +210,10 @@ document.addEventListener("DOMContentLoaded", function () {
             <th>Valor Ingresado</th>
             <th>Valor Esperado</th>
             <th>Diferencia</th>
-            <th>Ayuda</th>
+            <th>Acción</th>
+
+            
+            
           </tr>
         </thead>
         <tbody id="resultadosValidacionW08"></tbody>
@@ -218,25 +221,67 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   `;
 
-    Object.keys(codigosConocidos).forEach((codigo) => {
-      const valorActual = valoresActuales[codigo] || 0;
-      const valorEsperado = codigosConocidos[codigo];
-      const diferencia = valorActual - valorEsperado;
+// Genera boton para cambiar o mantener propuesta
+Object.keys(codigosConocidos).forEach((codigo) => {
+  const valorActual = valoresActuales[codigo] || 0;
+  const valorEsperado = codigosConocidos[codigo];
+  const diferencia = valorActual - valorEsperado;
 
-      const tr = document.createElement("tr");
-      if (diferencia !== 0) {
-        tr.classList.add("diferencia-encontrada");
-      }
-
+  const tr = document.createElement("tr");
+  if (diferencia !== 0) {
+      tr.classList.add("diferencia-encontrada");
       tr.innerHTML = `
+          <td>${codigo}</td>
+          <td>${formatNumber(valorActual)}</td>
+          <td>${formatNumber(valorEsperado)}</td>
+          <td>${formatNumber(diferencia)}</td>
+           
+           
+          
+          <td>
+              <div class="action-buttons">
+                  <button class="accept-value-btn" data-codigo="${codigo}" data-valor="${valorEsperado}">
+                      Aceptar valor SII
+                  </button>
+                  <button class="maintain-value-btn" data-codigo="${codigo}" data-valor="${valorActual}">
+                      Mantener valor ingresado
+                  </button>
+              </div>
+          </td>
+      `;
+  // Add event listeners for the buttons
+  const acceptBtn = tr.querySelector('.accept-value-btn');
+  const maintainBtn = tr.querySelector('.maintain-value-btn');
+
+  acceptBtn.addEventListener('click', function() {
+      const input = document.querySelector(`input[data-codigo="${codigo}"]`);
+      if (input) {
+          input.value = valorEsperado;
+          calcularTotal538();
+          tr.classList.remove('diferencia-encontrada');
+          this.disabled = true;
+          maintainBtn.disabled = true;
+          this.textContent = 'Valor SII aplicado';
+      }
+  });
+
+  maintainBtn.addEventListener('click', function() {
+      this.disabled = true;
+      acceptBtn.disabled = true;
+      this.textContent = 'Valor mantenido';
+  });
+
+} else {
+  tr.innerHTML = `
       <td>${codigo}</td>
       <td>${formatNumber(valorActual)}</td>
       <td>${formatNumber(valorEsperado)}</td>
       <td>${formatNumber(diferencia)}</td>
-      <td><a href="https://www.sii.cl" target="_blank">Ver ayuda</a></td>
-    `;
-      tbody.appendChild(tr);
-    });
+      <td></td>
+  `;
+}
+tbody.appendChild(tr);
+});
 
     if (hayDiferencias) {
       // Show popup only if there are differences
@@ -265,7 +310,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const tbodyW08 = document.getElementById("resultadosValidacionW08");
     tbodyW08.innerHTML = "";
 
-    w08Codigos.forEach((codigo) => {
+    // Show all codes from codigosConocidos that are related to W08
+    const w08AllCodigos = Object.keys(codigosConocidos).filter(codigo => 
+      ['520', '525', '762', '766'].includes(codigo)
+    );
+
+    w08AllCodigos.forEach((codigo) => {
       const valorActual = valoresActuales[codigo] || 0;
       const valorEsperado = codigosConocidos[codigo];
       const diferencia = valorActual - valorEsperado;
@@ -276,12 +326,47 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       tr.innerHTML = `
-      <td>${codigo}</td>
-      <td>${formatNumber(valorActual)}</td>
-      <td>${formatNumber(valorEsperado)}</td>
-      <td>${formatNumber(diferencia)}</td>
-      <td><a href="https://www.sii.cl" target="_blank">Ver ayuda</a></td>
-    `;
+        <td>${codigo}</td>
+        <td>${formatNumber(valorActual)}</td>
+        <td>${formatNumber(valorEsperado)}</td>
+        <td>${formatNumber(diferencia)}</td>
+        ${diferencia !== 0 ? `
+        <td>
+          <div class="action-buttons">
+            <button class="accept-value-btn" data-codigo="${codigo}" data-valor="${valorEsperado}">
+              Aceptar valor SII
+            </button>
+            <button class="maintain-value-btn" data-codigo="${codigo}" data-valor="${valorActual}">
+              Mantener valor ingresado
+            </button>
+          </div>
+        </td>` : `<td></td>`}
+      `;
+
+      // Add event listeners for the buttons
+      const acceptBtn = tr.querySelector('.accept-value-btn');
+      const maintainBtn = tr.querySelector('.maintain-value-btn');
+
+      if (acceptBtn && maintainBtn) {
+        acceptBtn.addEventListener('click', function() {
+          const input = document.querySelector(`input[data-codigo="${codigo}"]`);
+          if (input) {
+            input.value = valorEsperado;
+            calcularTotal538();
+            tr.classList.remove('diferencia-encontrada');
+            this.disabled = true;
+            maintainBtn.disabled = true;
+            this.textContent = 'Valor SII aplicado';
+          }
+        });
+
+        maintainBtn.addEventListener('click', function() {
+          this.disabled = true;
+          acceptBtn.disabled = true;
+          this.textContent = 'Valor mantenido';
+        });
+      }
+
       tbodyW08.appendChild(tr);
     });
   }
@@ -345,23 +430,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function ingresarPropuesta() {
     inputs.forEach((input) => {
-        const codigo = input.getAttribute('data-codigo');
-        if (codigo && codigo in codigosConocidos) {
-            input.value = codigosConocidos[codigo];
-        }
+      const codigo = input.getAttribute("data-codigo");
+      if (codigo && codigo in codigosConocidos) {
+        input.value = codigosConocidos[codigo];
+      }
     });
 
     // Enable validate button after populating values
     if (validarBtn) {
-        validarBtn.disabled = false;
+      validarBtn.disabled = false;
     }
-}
+  }
 
-// Add event listener for the button
-if (ingresarPropuestaBtn) {
-    ingresarPropuestaBtn.addEventListener('click', function() {
-        ingresarPropuesta();
-        calcularTotal538(); // Recalculate totals after populating values
+  // Add event listener for the button
+  if (ingresarPropuestaBtn) {
+    ingresarPropuestaBtn.addEventListener("click", function () {
+      ingresarPropuesta();
+      calcularTotal538(); // Recalculate totals after populating values
     });
 
     calcularTotal538();
@@ -483,16 +568,17 @@ document.querySelectorAll(".sidebar-btn").forEach((button) => {
   });
 });
 
-
 //boton esconde tootltip
 
-document.getElementById('tooltipToggle').addEventListener('change', function() {
-  const statusText = document.getElementById('tooltipStatus');
-  document.body.classList.toggle('hide-tooltips');
-  
-  if (this.checked) {
-      statusText.textContent = 'Activado';
-  } else {
-      statusText.textContent = 'Desactivado';
-  }
-});
+document
+  .getElementById("tooltipToggle")
+  .addEventListener("change", function () {
+    const statusText = document.getElementById("tooltipStatus");
+    document.body.classList.toggle("hide-tooltips");
+
+    if (this.checked) {
+      statusText.textContent = "Activado";
+    } else {
+      statusText.textContent = "Desactivado";
+    }
+  });

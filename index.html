@@ -1,4 +1,5 @@
-!DOCTYPE html>
+MAQUETA REQUERIMIENTOS ADICIONALES FORMULARIOS
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -50,7 +51,17 @@
                   Facturas emitidas por ventas y servicios del giro, o por
                   cuenta de terceros
                 </td>
-                <td>503</td>
+                <td>
+                  <div class="tooltip">
+                  503
+                  <span class="tooltiptext">
+                    [503] : Registre la cantidad de facturas emitidas y/o liquidaciones de facturas recibidas (manuales y electrónicas) por las operaciones afectas al Impuesto al Valor Agregado, siendo éstas ventas directas o a través de terceros mediante mandato, realizadas durante el período tributario por el cual se está presentando
+la declaración.
+                    <a href="https://www.sii.cl" target="SII.CL">Más info</a>
+                  </span>
+                  <span class="tooltip-icon">i</span>
+                </div>
+                </td>
                 <td><input type="number" class="doc-input" /></td>
                 <td>
                   <div class="tooltip">
@@ -657,7 +668,7 @@
                     <th>Valor Ingresado</th>
                     <th>Valor Esperado</th>
                     <th>Diferencia</th>
-                    <th>Ayuda</th>
+                    
                   </tr>
                 </thead>
                 <tbody id="resultadosValidacion"></tbody>
@@ -719,7 +730,20 @@
           </div>
 
           <div class="popup-buttons">
+            <button id="ayudas-Btn" class="ayudas-btn" onclick="document.getElementById('ayudasPopup').style.display='block'">
+              Ir a Ayudas
+            </button>
+            <div id="ayudasPopup" class="popup" style="display: none">
+              <div class="popup-content">
+                  <button class="close" onclick="document.getElementById('ayudasPopup').style.display='none'">
+                      Cerrar
+                  </button>
+                  <iframe src="Ayudas/ayudas.html" style="width: 100%; height: 100%;"></iframe>
+              </div>
+          </div>
+            </div></div>
             <button id="cerrarValidacion">Cerrar</button>
+            
           </div>
         </div>
       </div>

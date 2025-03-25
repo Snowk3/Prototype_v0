@@ -235,12 +235,12 @@ input[type="number"]:focus {
 #cerrarValidacion {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 40px;
   background-color: var(--rojo);
   color: var(--blanco);
-  width: 60px;
-  height: 30px;
-  border-radius: 50%;
+  width: 80px;
+  height: 40px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -519,4 +519,93 @@ button:disabled {
   top: 50%;
   transform: translateY(-50%);
   font-size: 16px;
+}
+
+/*boton ayuda*/
+#ayudas-Btn {
+  position: absolute;
+  top: 10px;
+  left: 950px;
+  background-color: var(--azul);
+  color: var(--blanco);
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+#ayudas-Btn:hover {
+  background-color: var(--naranja);
+}
+
+/*boton cerrar ayudas**/
+.close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 80px;
+  height: 40px;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.close:hover {
+  background-color: #c82333;
+}
+
+
+/*boton aceptar propuesta */ 
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.accept-value-btn,
+.maintain-value-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.accept-value-btn {
+  background-color: var(--azul);
+  color: white;
+}
+
+.maintain-value-btn {
+  background-color: var(--gris-marengo);
+  color: var(--blanco);
+}
+
+.accept-value-btn:hover {
+  background-color: #078017;
+}
+
+.maintain-value-btn:hover {
+  background-color: #d4d4d4;
+}
+
+.accept-value-btn:disabled,
+.maintain-value-btn:disabled {
+  background-color: var(--gris-claro);
+  cursor: not-allowed;
+  opacity: 0.7;
 }

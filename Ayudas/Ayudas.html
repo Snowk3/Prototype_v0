@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayudas - Sistema de Códigos</title>
+    <link rel="stylesheet" href="ayudas.css" />
+    <link
+      href="https://fonts.googleapis.com/css2>family=Open+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>Contenido de Ayudas</h1>
+          <p>
+            Encuentra información sobre las observaciones del formulario F29
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="container">
+        <ul>
+          <li><a href="#" class="active">Inicio</a></li>
+          <li><a href="#">Documentación</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section class="code-selector">
+        <h2>Selecciona un código</h2>
+        <select id="codeDropdown">
+          <option value="" disabled selected>Selecciona un código</option>
+          <option value="W01">W01</option>
+          <option value="FM01">FM01</option>
+          <option value="W08">W08</option>
+          <option value="W12">W12</option>
+          <option value="W10">W10</option>
+          <option value="W13">W13</option>
+          <option value="W40">W40</option>
+          <option value="W38">W38</option>
+          <option value="W14">W14</option>
+          <option value="W21">W21</option>
+        </select>
+      </section>
+
+      <section class="code-info" id="codeInfo">
+        <div class="info-placeholder">
+          <p>
+            Selecciona el código de la observacion del menú desplegable para ver
+            su información detallada.
+          </p>
+        </div>
+
+        <!-- Estas secciones se mostrarán dinámicamente según el código seleccionado -->
+        <div class="code-detail hidden" id="W01">
+          <h2>W01 - Subdeclaración de Debito Fiscal en Declaración Mensual.</h2>
+          <p>
+            El débito fiscal declarado por el contribuyente en su F29 por
+            concepto de ventas y/o servicios, es inferior al débito registrado
+            en su Información del Libro de Ventas, exceptuando Notas de crédito
+          </p>
+          <h3>¿A que se debe esta inconsistencia?</h3>
+          <p>
+            Su Declaracion Mensual y Pago Simultaneo de Impuestos Formulario 29
+            presenta inconsistencias, ya que de acuerdo a la informacion que
+            contiene, usted declaro un debito fiscal en los codigos [502],
+            [764], [717], [111], [513], [517], [501], [510], [734] y/o [709],
+            que es inferior al registrado en su Informacion del Registro de
+            Ventas.
+          </p>
+          <h3>¿Que debo hacer para solucionar este problema?</h3>
+          <p>
+            Si la diferencia se debe a error u omision en Declaracion Mensual y
+            Pago Simultaneo de Impuestos Formulario 29 debera efectuar
+            declaracion rectificatoria en los codigos [502], [764], [717],
+            [111], [513], [517], [501], [510], [734] y/o [709].Ingresando a:
+          </p>
+          <p>
+            Sitio www.sii.cl, menu >Servicios Online>Impuestos Mensuales>
+            submenu >Declaracion mensual (F29)> opciones: Declarar IVA (F29) o
+            Corregir o rectificar declaraciones
+          </p>
+          <p>
+            De existir un documento emitido por usted, no recibido por el SII,
+            debera realizar reenvio del documento, de lo contrario no se
+            considera valido. Si la diferencia se debe a error u omision en
+            Registro de Ventas o en IEV de periodos anteriores a agosto de 2017;
+            debera complementar, ajustar o enviar dicha informacion, segun
+            corresponda.
+          </p>
+          <p>
+            Si es Facturador Electronico con Software Comercial ingrese a:
+            Factura Electronica, menu >Ingresar al Sistema de facturacion de
+            Mercado>, submenu >Envio de DTE y libros de compras y ventas (*)>,
+            opcion >Enviar DTE y libros electronicos>.
+          </p>
+          <p>
+            Si es Facturador Electronico con Sistema de facturacion Gratuito del
+            SII ingrese a: Factura Electronica, menu >Ingresar al Sistema de
+            facturacion del SII>, submenu >Administracion de libros de compras y
+            ventas(*)>, opcion >Creacion, edicion y envio de libros>.
+          </p>
+        </div>
+
+        <div class="code-detail hidden" id="FM01">
+          <h2>FM01 - Inconsistencias en remanente declarado</h2>
+          <p>
+            La tasa y/o base imponible de PPM obligatorio, contribuyentes de
+            1era. Categoría Art.84 a), no están declaradas.
+          </p>
+          <h3>¿A que se debe esta inconsistencia?</h3>
+          <p>
+            Usted declaro en el codigo [504] de su Declaracion Mensual y Pago
+            Simultaneo de Impuestos (Formulario 29) un remanente de credito
+            fiscal del mes anterior que, resulta inconsistente con el remanente
+            de credito fiscal para el periodo siguiente declarado en del codigo
+            [77], del periodo tributario anterior.
+          </p>
+          <h3>¿Que debo hacer para solucionar este problema?</h3>
+          <p>
+            Para corregir la inconsistencia, debera rectificar su/s
+            declaracion/es eliminando el remante de credito fiscal mes anterior
+            declarado en el codigo [504] o ajustando el remanente debidamente
+            actualizado en base a su declaracion del periodo tributario anterior
+            al observado, es decir ingresando la cantidad resultante de la
+            multiplicacion entre el numero de Unidades Tributarias Mensuales
+            (UTM) determinadas en el periodo tributario anterior por el valor de
+            esta misma durante el periodo tributario en que debe ser presentada
+            esta declaracion. Para ello, debe acceder al sitio www.sii.cl, menu
+            Servicios online, submenu Impuestos mensuales, opcion Corregir o
+            rectificar declaracion.
+          </p>
+          <p>
+            Para conocer su situacion, ingrese a la Oficina Virtual del SII en
+            Internet (www.sii.cl), seleccione el menu Servicios Online, submenu
+            Impuestos mensuales, opcion Consulta y seguimiento (F29 y F50),
+            luego seleccione Consulta estado de declaracion donde se le
+            solicitara su autenticacion, una vez autenticado ingresara a la
+            aplicacion donde debera seleccionar la opcion Consultar, para luego
+            marcar la opcion Notificaciones.
+          </p>
+          <p>
+            Si Ud. no esta de acuerdo con las inconsistencias informadas, debera
+            concurrir a la Unidad del Servicio de Impuestos Internos
+            correspondiente a su Jurisdiccion, para aclarar dichas
+            observaciones.
+          </p>
+        </div>
+
+        <div class="code-detail hidden" id="W08">
+          <h2>W08 - Sobredeclaración de credito fiscal</h2>
+          <p>
+            El IVA crédito declarado por el contribuyente en su F29 por concepto
+            de s recibidas del giro, facturas de compra emitidas y facturas
+            activo fijo códigos [520], [762], [766] y [525] de F 29, no debe ser
+            mayor al crédito registrado en su Información del Libro Registro de
+            Compras.
+          </p>
+          <h3>¿A que se debe esta inconsistencia?</h3>
+          <p>
+            Su Declaracion Mensual y Pago Simultaneo de Impuestos Formulario 29
+            presenta inconsistencias,ya que de acuerdo a la informacion que
+            contiene, usted declaro credito fiscal en los codigos [520], [762],
+            [766] y/o [525] de su F29, un monto de credito de IVA mayor al
+            credito determinado de acuerdo a su Registro de Compras, o bien ud.
+            no ha presentado IEC en periodos anteriores a agosto de 2017.
+          </p>
+          <h3>¿Que debo hacer para solucionar este problema?</h3>
+          <p>
+            Si la diferencia se debe a un error u omision en su Declaracion
+            Mensual y Pago Simultaneo de Impuestos Formulario 29, debera
+            efectuar declaracion rectificatoria ajustando el credito fiscal del
+            periodo declarado en los codigos: [520], [762], [766] y/o [525], a
+            lo efectivamente registrado en su registro de compras. Esta accion
+            se realiza ingresando a:
+          </p>
+          <p>
+            En caso de existir un documento emitido por un proveedor que no ha
+            sido recibido por el SII, debera contactarse con el para verificar
+            la situacion y solicitar el reenvio, de lo contrario este documento
+            no se considera valido.
+          </p>
+        </div>
+
+        <div class="code-detail hidden" id="W12">
+          <h2>W12 - Error de Conexión</h2>
+          <h3>¿A que se debe esta inconsistencia?</h3>
+          <p>
+            Su Declaracion Mensual y Pago Simultaneo de Impuestos Formulario 29,
+            presenta inconsistencias ya que de acuerdo a la informacion que
+            contiene, usted declaro credito fiscal en los codigos [535] y/o
+            [553], que es superior al registrado en su Informacion del Libro de
+            Compras.
+          </p>
+          <h3>¿Que debo hacer para solucionar este problema?</h3>
+          <p>
+            -Para corregir la inconsistencia de su declaracion, debera
+            rectificarla disminuyendo el credito fiscal declarado en los codigos
+            [535] y/o [553]. Para ello, debe acceder al sitio www.sii.cl, menu
+            ?Impuestos Mensuales?, submenu ?Declaraciones mensuales (F29 y
+            F50)?, opcion ?Corregir o rectificar declaraciones (F29 y F50)?. -Si
+            la diferencia se debe a un error u omision en el registro de los
+            documentos en su Informacion del Libro de Compras o no ha remitido
+            dicha informacion al Servicio, debera reemplazar, ajustar o enviar
+            dicha informacion, segun corresponda, ingresando a:
+          </p>
+          <p>
+            Si Ud. es Facturador Electronico con Software Comercial ingrese a:
+            Factura Electronica, menu ?Ingresar al Sistema de facturacion de
+            Mercado?, submenu ?Envio de DTE y libros de compras y ventas(*)?,
+            opcion ?Enviar DTE y libros electronicos?.
+          </p>
+          <p>
+            Si Ud. es Facturador Electronico con Sistema de facturacion Gratuito
+            del SII ingrese a: Factura Electronica, menu ?Ingresar al Sistema de
+            facturacion del SII?, submenu ?Administracion de libros de compras y
+            ventas(*)?, opcion ?Creacion, edicion y envio de libros?.
+          </p>
+          <p>
+            Si Ud. no se encuentra en los casos anteriores ingrese a: Menu
+            ?Impuestos Mensuales?, submenu ?Importador de Libros de Compras y
+            Ventas?, opcion ?Enviar o Corregir Libros?. -El detalle de la
+            informacion de compras remitida al Servicio, se puede visualizar
+            ingresando en el menu ?Impuestos Mensuales?, submenu ?Importador de
+            Libros de Compras y Ventas?, opcion ?Consultar y visualizar libros?.
+          </p>
+        </div>
+
+        <div class="code-detail hidden" id="W10">
+          <h2>W10 - Tiempo de Espera Agotado</h2>
+          <h3>¿A que se debe esta inconsistencia?</h3>
+          <p>
+            Su Declaracion Mensual y Pago Simultaneo de Impuestos Formulario 29,
+            presenta inconsistencias ya que de acuerdo a la informacion que
+            contiene, usted declaro credito fiscal en el codigo [528], que es
+            inferior al registrado en su Informacion del Libro de Compras.
+          </p>
+          <h3>¿Que debo hacer para solucionar este problema?</h3>
+          <p>
+            -Para corregir la inconsistencia de su declaracion, debera
+            rectificarla disminuyendo el credito fiscal declarado en codigo
+            [528]. Para ello, debe acceder al sitio www.sii.cl, menu ?Impuestos
+            Mensuales?, submenu ?Declaraciones mensuales (F29 y F50)?, opcion
+            ?Corregir o rectificar declaraciones (F29 y F50)?. -Si la diferencia
+            se debe a un error en el registro de los documentos en su
+            Informacion del Libro de Compras debera reemplazar o ajustar su
+            libro, segun corresponda, ingresando a :
+          </p>
+          <p>
+            Si Ud. es Facturador Electronico con Software Comercial ingrese a:
+            Factura Electronica, menu ?Ingresar al Sistema de facturacion de
+            Mercado?, submenu ?Envio de DTE y libros de compras y ventas(*)?,
+            opcion ?Enviar DTE y libros electronicos?.
+          </p>
+          <p>
+            Si Ud. es Facturador Electronico con Sistema de facturacion Gratuito
+            del SII ingrese a: Factura Electronica, menu ?Ingresar al Sistema de
+            facturacion del SII?, submenu ?Administracion de libros de compras y
+            ventas(*)?, opcion ?Creacion, edicion y envio de libros?.
+          </p>
+          <p>
+            Si Ud. no se encuentra en los casos anteriores ingrese a: Menu
+            ?Impuestos Mensuales?, submenu ?Importador de Libros de Compras y
+            Ventas?, opcion ?Enviar o Corregir Libros?. -El detalle de la
+            informacion de compras remitida al Servicio, se puede visualizar
+            ingresando en el menu ?Impuestos Mensuales?, submenu ?Importador de
+            Libros de Compras y Ventas?, opcion ?Consultar y visualizar libros?.
+          </p>
+        </div>
+
+        <div class="code-detail hidden" id="W13">
+          <h2>W13 - Error de Autenticación</h2>
+          <h3>Problemas con las credenciales de acceso</h3>
+          <p>
+            Las credenciales proporcionadas no son válidas o han expirado.
+            Verifica que tu nombre de usuario y contraseña sean correctos. Si
+            has olvidado tus credenciales, utiliza el sistema de recuperación.
+            Asegúrate también de que tu cuenta esté activa y no esté bloqueada.
+          </p>
+        </div>
+
+        <div class="code-detail hidden" id="W40">
+          <h2>W40 - Error de Integridad de Datos</h2>
+          <h3>Inconsistencias en la información</h3>
+          <p>
+            Se han detectado inconsistencias en los datos proporcionados que
+            afectan la integridad de la información. Revisa cuidadosamente todos
+            los campos y asegúrate de que los valores sean coherentes entre sí.
+            Verifica especialmente cálculos, sumatorias y referencias cruzadas.
+          </p>
+        </div>
+
+        <div class="code-detail hidden" id="W38">
+          <h2>W38 - Error de Versión</h2>
+          <h3>Versión obsoleta del sistema</h3>
+          <p>
+            Estás utilizando una versión del sistema que ya no es compatible.
+            Descarga e instala la última versión disponible desde el sitio
+            oficial. La actualización incluye correcciones de seguridad y
+            mejoras de funcionalidad que son necesarias para el correcto
+            funcionamiento.
+          </p>
+        </div>
+
+        <div class="code-detail hidden" id="W14">
+          <h2>W14 - Error de Permisos</h2>
+          <h3>Falta de privilegios para la operación</h3>
+          <p>
+            Tu cuenta no tiene los permisos necesarios para realizar esta
+            operación. Contacta al administrador del sistema para que asigne los
+            privilegios adecuados a tu perfil. Verifica también que estés
+            accediendo al módulo correcto según tu rol en la organización.
+          </p>
+        </div>
+
+        <div class="code-detail hidden" id="W21">
+          <h2>W21 - Error de Procesamiento</h2>
+          <h3>Fallo en el procesamiento de datos</h3>
+          <p>
+            Se ha producido un error durante el procesamiento de los datos. Esto
+            puede deberse a valores inesperados o a condiciones no contempladas
+            en el diseño original. Por favor, reporta este error al equipo de
+            soporte técnico incluyendo detalles sobre los pasos que llevaron al
+            problema.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>Contenido de Ayudas &copy; 2025 - Todos los derechos reservados</p>
+       </div>
+    </footer>
+
+    <script src="Ayudas.js"></script>
+  </body>
+</html>
