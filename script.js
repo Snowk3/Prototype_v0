@@ -231,45 +231,34 @@ Object.keys(codigosConocidos).forEach((codigo) => {
   if (diferencia !== 0) {
       tr.classList.add("diferencia-encontrada");
       tr.innerHTML = `
-          <td>${codigo}</td>
-          <td>${formatNumber(valorActual)}</td>
-          <td>${formatNumber(valorEsperado)}</td>
-          <td>${formatNumber(diferencia)}</td>
-           
-           
-          
-          <td>
-              <div class="action-buttons">
-                  <button class="accept-value-btn" data-codigo="${codigo}" data-valor="${valorEsperado}">
-                      Aceptar valor SII
-                  </button>
-                  <button class="maintain-value-btn" data-codigo="${codigo}" data-valor="${valorActual}">
-                      Mantener valor ingresado
-                  </button>
-              </div>
-          </td>
-      `;
-  // Add event listeners for the buttons
+      <td>${codigo}</td>
+      <td>${formatNumber(valorActual)}</td>
+      <td>${formatNumber(valorEsperado)}</td>
+      <td>${formatNumber(diferencia)}</td>
+      ${diferencia !== 0 ? `
+      <td>
+          <div class="action-buttons">
+              <button class="accept-value-btn" data-codigo="${codigo}" data-valor="${valorEsperado}">
+                  Aceptar valor SII
+              </button>
+          </div>
+      </td>` : `<td></td>`}
+  `;
+  
+  // Update event listener section
   const acceptBtn = tr.querySelector('.accept-value-btn');
-  const maintainBtn = tr.querySelector('.maintain-value-btn');
-
-  acceptBtn.addEventListener('click', function() {
-      const input = document.querySelector(`input[data-codigo="${codigo}"]`);
-      if (input) {
-          input.value = valorEsperado;
-          calcularTotal538();
-          tr.classList.remove('diferencia-encontrada');
-          this.disabled = true;
-          maintainBtn.disabled = true;
-          this.textContent = 'Valor SII aplicado';
-      }
-  });
-
-  maintainBtn.addEventListener('click', function() {
-      this.disabled = true;
-      acceptBtn.disabled = true;
-      this.textContent = 'Valor mantenido';
-  });
+  if (acceptBtn) {
+      acceptBtn.addEventListener('click', function() {
+          const input = document.querySelector(`input[data-codigo="${codigo}"]`);
+          if (input) {
+              input.value = valorEsperado;
+              calcularTotal538();
+              tr.classList.remove('diferencia-encontrada');
+              this.disabled = true;
+              this.textContent = 'Valor SII aplicado';
+          }
+      });
+  }
 
 } else {
   tr.innerHTML = `
@@ -326,46 +315,34 @@ tbody.appendChild(tr);
       }
 
       tr.innerHTML = `
-        <td>${codigo}</td>
-        <td>${formatNumber(valorActual)}</td>
-        <td>${formatNumber(valorEsperado)}</td>
-        <td>${formatNumber(diferencia)}</td>
-        ${diferencia !== 0 ? `
-        <td>
+      <td>${codigo}</td>
+      <td>${formatNumber(valorActual)}</td>
+      <td>${formatNumber(valorEsperado)}</td>
+      <td>${formatNumber(diferencia)}</td>
+      ${diferencia !== 0 ? `
+      <td>
           <div class="action-buttons">
-            <button class="accept-value-btn" data-codigo="${codigo}" data-valor="${valorEsperado}">
-              Aceptar valor SII
-            </button>
-            <button class="maintain-value-btn" data-codigo="${codigo}" data-valor="${valorActual}">
-              Mantener valor ingresado
-            </button>
+              <button class="accept-value-btn" data-codigo="${codigo}" data-valor="${valorEsperado}">
+                  Aceptar valor SII
+              </button>
           </div>
-        </td>` : `<td></td>`}
-      `;
-
-      // Add event listeners for the buttons
-      const acceptBtn = tr.querySelector('.accept-value-btn');
-      const maintainBtn = tr.querySelector('.maintain-value-btn');
-
-      if (acceptBtn && maintainBtn) {
-        acceptBtn.addEventListener('click', function() {
+      </td>` : `<td></td>`}
+  `;
+  
+  // Update event listener section
+  const acceptBtn = tr.querySelector('.accept-value-btn');
+  if (acceptBtn) {
+      acceptBtn.addEventListener('click', function() {
           const input = document.querySelector(`input[data-codigo="${codigo}"]`);
           if (input) {
-            input.value = valorEsperado;
-            calcularTotal538();
-            tr.classList.remove('diferencia-encontrada');
-            this.disabled = true;
-            maintainBtn.disabled = true;
-            this.textContent = 'Valor SII aplicado';
+              input.value = valorEsperado;
+              calcularTotal538();
+              tr.classList.remove('diferencia-encontrada');
+              this.disabled = true;
+              this.textContent = 'Valor SII aplicado';
           }
-        });
-
-        maintainBtn.addEventListener('click', function() {
-          this.disabled = true;
-          acceptBtn.disabled = true;
-          this.textContent = 'Valor mantenido';
-        });
-      }
+      });
+  }
 
       tbodyW08.appendChild(tr);
     });
